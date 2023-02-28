@@ -20,6 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+			
 
 			getMessage: async () => {
 				try{
