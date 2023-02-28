@@ -18,7 +18,8 @@ def login():
     user= User.query.filter_by(email=data['email'],password=data['password']).first()
     # user= User.query.filter_by(email=data.get['email'],password=data.get['password']).first()
     if user:
-        return jsonify(data), 200
+        token=create_access_token(identity=user.id)
+        return jsonify({"token":token}), 200
 
     return jsonify({"message":"Usuario/Contraseña incorrectos"}),400
 
