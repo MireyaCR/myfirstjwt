@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+
 import "../../styles/home.css";
 
 export const Login = () => {
@@ -12,9 +12,6 @@ export const Login = () => {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-
-
-
         var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -34,24 +31,7 @@ export const Login = () => {
             })
         .then(result => localStorage.setItem("jwt-token", result.token))
         .catch(error => console.log('error', error));
-        // const opts={
-        //     method: 'POST',
-        //     headers:{
-        //         "Content-Type":"application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         "email":email,
-        //         "password":password
-        //     })
-        // }
-        // fetch('https://3001-mireyacr-myfirstjwt-lmb5rbs4lva.ws-eu88.gitpod.io/api/login',opts)
-        // .then(resp=> {
-        //     if (resp.status ===200) return resp.json();
-        //     else console.log("There has been some error")
-        // })
-        // .catch(error=>{
-        //     console.error("There was an error!",error);
-        // })
+       
         // localStorage.setItem("jwt-token", data.token);
     }
 
