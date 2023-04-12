@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Registro = () => {
+
+export const SignUp = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,7 +50,7 @@ export const Registro = () => {
     const data = { email, password };
     
     fetch(
-      "https://3001-mireyacr-myfirstjwt-e2c775fcj9l.ws-eu92.gitpod.io/api/registro",
+      "https://3001-mireyacr-myfirstjwt-e2c775fcj9l.ws-eu93.gitpod.io/api/registro",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -57,10 +58,12 @@ export const Registro = () => {
       }
     )
       .then((response) => response.json())
-      .then((data) => {
+      .then((data) => {      
         console.log(data)
         if(data.status === 200){
-           navigate("/login")
+          setTimeout(() => {
+             navigate('/login');
+          }, 50);
         }else{
           alert(data.msg)
         }

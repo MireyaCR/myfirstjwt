@@ -12,8 +12,7 @@ api = Blueprint('api', __name__)
 @api.route('/login', methods=['POST'])
 def login():
     data = request.json    
-    user= User.query.filter_by(email=data['email'],password=data['password']).first()
-    # user= User.query.filter_by(email=data.get['email'],password=data.get['password']).first()
+    user= User.query.filter_by(email=data.get('email'),password=data.get('password')).first()
     if user:
         token=create_access_token(identity=user.id)
         return jsonify({"token":token}), 200
@@ -40,5 +39,5 @@ def registro():
             new_user = User(email=body['email'], password=body['password'])
             db.session.add(new_user)
             db.session.commit()
-            return jsonify({"msg": "User registered successfully"}), 201
-        return jsonify({"msg": "User already exists"}), 400
+            return jsonify({"msg": "User registered successfully","status":200}), 200
+        return jsonify({"msg": "User already exists","status":400}), 400
