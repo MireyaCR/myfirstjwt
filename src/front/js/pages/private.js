@@ -31,9 +31,8 @@ export const Private = () => {
                     <div className="card mt-5">
                         <div className="card-header">
                             <h3 className="card-title text-center">Private</h3>
-                        </div>
-                        <div className="card-body"></div>                        
-                        <button  className="btn btn-primary mt-3 my-3" 
+                        </div>                                   
+                        <button  className="btn btn-primary mx-auto my-3" 
                                 onClick={handleLogout}>Log out</button>
                                          
                     </div>
