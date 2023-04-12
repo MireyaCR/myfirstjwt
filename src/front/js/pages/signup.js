@@ -60,13 +60,15 @@ export const SignUp = () => {
       .then((response) => response.json())
       .then((data) => {      
         console.log(data)
-        if(data.status === 200){
-          setTimeout(() => {
-             navigate('/login');
-          }, 50);
-        }else{
+        if(data.status === 200){        
+            navigate('/login');       
+        }else if(data.status === 400){
           alert(data.msg)
+          setTimeout(() => {
+            navigate('/login');
+          }, 100);
         }
+       
       })
       .catch((error) => console.error(error));
   };
