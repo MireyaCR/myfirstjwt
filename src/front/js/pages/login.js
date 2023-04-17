@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext,useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
 
 export const Login = () => {
+
+   
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
+    const { actions } = useContext(Context);
+
+    useEffect(() => {
+        const storedEmail = actions.getEmail();
+        if (storedEmail) {
+          setEmail(storedEmail);
+        }
+      }, [actions]);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
+        console.log(setEmail)
     };
 
     const handleEmailBlur = (event) => {
@@ -35,7 +47,7 @@ export const Login = () => {
         }    
     };
 
-    const handleSubmit = async (event) =>{
+    const handleSubmit =  (event) =>{
         event.preventDefault();    
 
         if(emailError){
@@ -58,21 +70,22 @@ export const Login = () => {
                 "password":password
             }),
         }
-        try{          
-            const response= await fetch("https://3001-mireyacr-myfirstjwt-e2c775fcj9l.ws-eu93.gitpod.io/api/login", requestOptions)
-            if (response.status ===200) {                    
-                const data = await response.json();
-                localStorage.setItem("jwt-token", data.token); 
-                console.log("vamos a la zona privada");              
-                navigate('/private');
-              
-            } else {
-                  throw new Error("There has been some error");
-            }
-        }catch (error) {
-            console.error('error', error);
-        }
-      
+             
+            fetch("https://3001-mireyacr-myfirstjwt-e2c775fcj9l.ws-eu94.gitpod.io/api/login", requestOptions)
+            .then((response)=>response.json())
+            .then((response)=>{
+                if (response.status ===200) {                    
+                    localStorage.setItem("jwt-token", response.token);                           
+                    navigate('/private');
+                  
+                } else {
+                    alert(response.message)
+                }    
+            }).catch((err)=>{
+                console.log(err)
+            })
+
+       
     };
 
 	return (       

@@ -13,9 +13,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			email: null
 		},
 		actions: {
+			setEmail: (email) => {
+				setStore({ email: email });
+			  },
+			getEmail :()=>{
+				return getStore().email
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
